@@ -1,0 +1,204 @@
+openapi: 3.0.0
+info:
+  title: Financial API
+  version: 1.0.0
+paths:
+  /accounts:
+    get:
+      summary: Get all accounts
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              example:
+                - id_compte: 1
+                  nom_compte: "John Doe"
+                  solde: 1000.00
+                  type_compte: "épargne"
+                  date_ouverture: "2023-01-01"
+    post:
+      summary: Create a new account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              nom_compte: "Jane Doe"
+              solde: 500.00
+              type_compte: "courant"
+      responses:
+        '201':
+          description: Account created successfully
+
+  /accounts/{id}:
+    get:
+      summary: Get account details by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: ID of the account
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              example:
+                id_compte: 1
+                nom_compte: "John Doe"
+                solde: 1000.00
+                type_compte: "épargne"
+                date_ouverture: "2023-01-01"
+    put:
+      summary: Update account details by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: ID of the account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              solde: 1200.00
+      responses:
+        '200':
+          description: Account updated successfully
+
+  /transactions:
+    get:
+      summary: Get all transactions
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              example:
+                - id_transaction: 1
+                  id_compte: 1
+                  montant: 100.00
+                  type_transaction: "dépôt"
+                  date_transaction: "2023-01-05"
+    post:
+      summary: Create a new transaction
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              id_compte: 1
+              montant: 50.00
+              type_transaction: "retrait"
+      responses:
+        '201':
+          description: Transaction created successfully
+
+  /transactions/{id}:
+    get:
+      summary: Get transaction details by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: ID of the transaction
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              example:
+                id_transaction: 1
+                id_compte: 1
+                montant: 100.00
+                type_transaction: "dépôt"
+                date_transaction: "2023-01-05"
+    put:
+      summary: Update transaction details by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: ID of the transaction
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              montant: 120.00
+      responses:
+        '200':
+          description: Transaction updated successfully
+
+  /currencies:
+    get:
+      summary: Get all currencies
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              example:
+                - code_devise: "USD"
+                  nom_devise: "US Dollar"
+                  taux_change: 1.0
+    post:
+      summary: Create a new currency
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              code_devise: "EUR"
+              nom_devise: "Euro"
+              taux_change: 1.2
+      responses:
+        '201':
+          description: Currency created successfully
+
+  /currencies/{code}:
+    get:
+      summary: Get currency details by code
+      parameters:
+        - in: path
+          name: code
+          required: true
+          schema:
+            type: string
+          description: Code of the currency
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              example:
+                code_devise: "USD"
+                nom_devise: "US Dollar"
+                taux_change: 1.0
+    put:
+      summary: Update currency details by code
+      parameters:
+        - in: path
+          name: code
+          required: true
+          schema:
+            type: string
+          description: Code of the currency
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              taux_change: 1.1
+      responses:
+        '200':
+          description: Currency updated successfully
